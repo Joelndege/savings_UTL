@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import '../config/app_colors.dart';
+import '../config/app_routes.dart';
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo icon
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: AppColors.goldGradient,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.gold.withAlpha(60),
+                    blurRadius: 40,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.account_balance_rounded,
+                color: AppColors.background,
+                size: 48,
+              ),
+            )
+                .animate()
+                .scale(
+                  begin: const Offset(0.5, 0.5),
+                  end: const Offset(1, 1),
+                  duration: 800.ms,
+                  curve: Curves.elasticOut,
+                )
+                .fadeIn(duration: 600.ms),
+            const SizedBox(height: 30),
+            Text(
+              'SAVINGS UTL',
+              style: GoogleFonts.orbitron(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                color: AppColors.gold,
+                letterSpacing: 6,
+              ),
+            )
+                .animate()
+                .fadeIn(delay: 400.ms, duration: 800.ms)
+                .slideY(begin: 0.3, end: 0, duration: 600.ms),
+            const SizedBox(height: 10),
+            Text(
+              'DIGITAL FINANCIAL VAULT',
+              style: GoogleFonts.inter(
+                fontSize: 12,
+                color: AppColors.textMuted,
+                letterSpacing: 4,
+              ),
+            ).animate().fadeIn(delay: 800.ms, duration: 800.ms),
+            const SizedBox(height: 60),
+            SizedBox(
+              width: 30,
+              height: 30,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppColors.gold.withAlpha(150),
+              ),
+            ).animate().fadeIn(delay: 1200.ms, duration: 600.ms),
+          ],
+        ),
+      ),
+    );
+  }
+}
