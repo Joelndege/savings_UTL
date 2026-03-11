@@ -18,19 +18,21 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY requirements.txt /app/
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    pip install gunicorn whitenoise
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . /app/
 
+# Make entrypoint script executable
+RUN chmod +x /app/entrypoint.sh
+
 # Create a non-privileged user and switch to it
-RUN adduser --disabled-password --no-create-home django-user
+RUN adduser --disabled-password --no-create-home django-user && \
+    chown -R django-user:django-user /app
 USER django-user
 
-# Port the app runs on
+# Expose the port (Railway will assign $PORT at runtime)
 EXPOSE 8000
 
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
+# Use the entrypoint script to run migrations and start the server
+CMD ["/app/entrypoint.sh"]
