@@ -26,7 +26,8 @@ COPY . /app/
 
 # Fix line endings (CRLF -> LF) and make executable
 RUN sed -i 's/\r$//' /app/entrypoint.sh && \
-    chmod +x /app/entrypoint.sh
+    chmod +x /app/entrypoint.sh && \
+    mkdir -p /app/staticfiles
 
 
 # Create a non-privileged user and switch to it
