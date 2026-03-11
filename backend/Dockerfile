@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     build-essential \
     libpq-dev \
+    sed \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -23,8 +24,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
-# Make entrypoint script executable
-RUN chmod +x /app/entrypoint.sh
+# Fix line endings (CRLF -> LF) and make executable
+RUN sed -i 's/\r$//' /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
 
 # Create a non-privileged user and switch to it
 RUN adduser --disabled-password --no-create-home django-user && \
