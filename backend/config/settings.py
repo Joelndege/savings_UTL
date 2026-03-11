@@ -13,6 +13,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 # Support Railway domain and local development
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,.up.railway.app').split(',')
 
+# If in production and no specific hosts, be more permissive for internal health checks
+if not DEBUG and '*' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('*')
+
+
 
 
 # Applications

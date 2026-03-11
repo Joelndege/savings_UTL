@@ -4,8 +4,13 @@ import 'package:http/http.dart' as http;
 /// Central API service handling all HTTP calls to the Django backend.
 /// Stores JWT tokens for authenticated requests.
 class ApiService {
-  // For Android emulator use 10.0.2.2; for physical device use your local IP
-  static const String baseUrl = 'http://10.0.2.2:8000/api';
+  // Toggle this for production vs local development
+  static const bool isProduction = false; 
+  
+  // For Android emulator use 10.0.2.2; for local dev use localhost or IP; for production use your live URL
+  static const String baseUrl = isProduction 
+      ? 'https://your-production-url.up.railway.app/api' 
+      : 'http://10.0.2.2:8000/api';
 
   String? _accessToken;
   String? _refreshToken;
