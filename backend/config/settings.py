@@ -5,13 +5,11 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
+# Security
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'unsafe-secret-key')
 
-# Default DEBUG to False if not provided (safer for production)
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'true'
 
-# Support Railway domain and local development
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,.up.railway.app').split(',')
 ALLOWED_HOSTS = [
     "savingsutl-production.up.railway.app",
     ".railway.app",
@@ -19,6 +17,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://savingsutl-production.up.railway.app",
+    "https://*.railway.app",
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
