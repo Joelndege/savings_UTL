@@ -14,10 +14,14 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'False'
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,.up.railway.app').split(',')
 ALLOWED_HOSTS = [
     "savingsutl-production.up.railway.app",
+    ".railway.app",
 ]
+
 CSRF_TRUSTED_ORIGINS = [
     "https://savingsutl-production.up.railway.app",
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # If in production and no specific hosts, be more permissive for internal health checks
 if not DEBUG and '*' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('*')
