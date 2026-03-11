@@ -176,8 +176,9 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    ''
-).split(',') if not DEBUG else []
-
+if not DEBUG:
+    CORS_ALLOWED_ORIGINS = [
+        "https://savingsutl-production.up.railway.app",
+    ]
+else:
+    CORS_ALLOWED_ORIGINS = []
