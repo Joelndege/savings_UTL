@@ -7,3 +7,5 @@ django-environ
 whitenoise
 gunicorn
 dj-database-url
+dj-database-url
+psycopg2-binary
