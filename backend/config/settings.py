@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'corsheaders',
+    
 
     'api',
 ]
@@ -60,8 +60,8 @@ MIDDLEWARE = [
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    
+    
 ]
 
 
