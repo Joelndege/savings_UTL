@@ -8,12 +8,11 @@ class ApiService {
   static const bool isProduction = false; 
   
   // For Android emulator use 10.0.2.2; for local dev use localhost or IP; for production use your live URL
-  static const String baseUrl = isProduction 
-      ? 'https://savingsutl-production.up.railway.app/api' 
-      : 'http://10.0.2.2:8000/api';
+// API base URL for production
+static const String baseUrl = "https://savingsutl-production.up.railway.app/api";
 
-  String? _accessToken;
-  String? _refreshToken;
+String? _accessToken;
+String? _refreshToken;
 
   // Singleton
   static final ApiService _instance = ApiService._internal();
